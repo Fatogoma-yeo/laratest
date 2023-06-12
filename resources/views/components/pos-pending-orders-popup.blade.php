@@ -122,8 +122,6 @@ $maxWidth = [
             }
         });
         document.getElementById('order-products-modal').style.display = "flex";
-        document.getElementById('pending-orders-modal').style.display = "none";
-        x.style.overflow = "hidden";
     }
 </script>
 @endpush

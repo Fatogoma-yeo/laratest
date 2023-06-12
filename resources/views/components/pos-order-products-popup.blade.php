@@ -75,6 +75,7 @@ $maxWidth = [
               document.getElementById('orders_id').innerText = id;
 
               document.getElementById('order-products-modal').style.display = "none";
+              document.getElementById('pending-orders-modal').style.display = "none";
               x.style.overflow = "auto";
           }
       });
