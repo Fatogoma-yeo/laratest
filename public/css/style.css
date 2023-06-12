@@ -1,0 +1,160 @@
+ul {
+    display: flex;
+    list-style: none;
+}
+@media (min-width: 640px) {
+    table {
+    display: inline-table !important;
+    }
+
+    thead tr:not(:first-child) {
+    display: none;
+    }
+}
+
+td:not(:last-child) {
+    border-bottom: 0;
+}
+
+th:not(:last-child) {
+    border-bottom: 2px solid rgba(0, 0, 0, .1);
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-container * {
+    visibility: visible;
+  }
+  #printable-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #sale-report * {
+    visibility: visible;
+  }
+  #sale-report {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #best-products-report * {
+    visibility: visible;
+  }
+  #best-products-report {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #report-printable * {
+    visibility: visible;
+  }
+  #report-printable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #profit-report * {
+    visibility: visible;
+  }
+  #profit-report {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #low-stock-report * {
+    visibility: visible;
+  }
+  #low-stock-report {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #cash-flow-report * {
+    visibility: visible;
+  }
+  #cash-flow-report {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+  .animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  .animated.faster {
+    -webkit-animation-duration: 500ms;
+    animation-duration: 500ms;
+  }
+
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+
+  .fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }

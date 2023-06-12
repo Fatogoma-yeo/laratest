@@ -60,8 +60,6 @@ class ConsoleSectionOutput extends StreamOutput
      * Clears previous output for this section.
      *
      * @param int $lines Number of lines to clear. If null, then the entire output of this section is cleared
-     *
-     * @return void
      */
     public function clear(int $lines = null)
     {
@@ -83,8 +81,6 @@ class ConsoleSectionOutput extends StreamOutput
 
     /**
      * Overwrites the previous output with a new message.
-     *
-     * @return void
      */
     public function overwrite(string|iterable $message)
     {
@@ -119,8 +115,7 @@ class ConsoleSectionOutput extends StreamOutput
             // re-add the line break (that has been removed in the above `explode()` for
             // - every line that is not the last line
             // - if $newline is required, also add it to the last line
-            // - if it's not new line, but input ending with `\PHP_EOL`
-            if ($i < $count || $newline || str_ends_with($input, \PHP_EOL)) {
+            if ($i < $count || $newline) {
                 $lineContent .= \PHP_EOL;
             }
 
@@ -154,18 +149,6 @@ class ConsoleSectionOutput extends StreamOutput
         return $linesAdded;
     }
 
-    /**
-     * @internal
-     */
-    public function addNewLineOfInputSubmit(): void
-    {
-        $this->content[] = \PHP_EOL;
-        ++$this->lines;
-    }
-
-    /**
-     * @return void
-     */
     protected function doWrite(string $message, bool $newline)
     {
         if (!$this->isDecorated()) {

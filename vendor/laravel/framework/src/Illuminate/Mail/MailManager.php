@@ -3,16 +3,13 @@
 namespace Illuminate\Mail;
 
 use Aws\Ses\SesClient;
-use Aws\SesV2\SesV2Client;
 use Closure;
 use Illuminate\Contracts\Mail\Factory as FactoryContract;
 use Illuminate\Log\LogManager;
 use Illuminate\Mail\Transport\ArrayTransport;
 use Illuminate\Mail\Transport\LogTransport;
 use Illuminate\Mail\Transport\SesTransport;
-use Illuminate\Mail\Transport\SesV2Transport;
 use Illuminate\Support\Arr;
-use Illuminate\Support\ConfigurationUrlParser;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -157,8 +154,7 @@ class MailManager implements FactoryContract
             return call_user_func($this->customCreators[$transport], $config);
         }
 
-        if (trim($transport ?? '') === '' ||
-            ! method_exists($this, $method = 'create'.ucfirst(Str::camel($transport)).'Transport')) {
+        if (trim($transport ?? '') === '' || ! method_exists($this, $method = 'create'.ucfirst($transport).'Transport')) {
             throw new InvalidArgumentException("Unsupported mail transport [{$transport}].");
         }
 
@@ -250,28 +246,6 @@ class MailManager implements FactoryContract
 
         return new SesTransport(
             new SesClient($this->addSesCredentials($config)),
-            $config['options'] ?? []
-        );
-    }
-
-    /**
-     * Create an instance of the Symfony Amazon SES V2 Transport driver.
-     *
-     * @param  array  $config
-     * @return \Illuminate\Mail\Transport\Se2VwTransport
-     */
-    protected function createSesV2Transport(array $config)
-    {
-        $config = array_merge(
-            $this->app['config']->get('services.ses', []),
-            ['version' => 'latest'],
-            $config
-        );
-
-        $config = Arr::except($config, ['transport']);
-
-        return new SesV2Transport(
-            new SesV2Client($this->addSesCredentials($config)),
             $config['options'] ?? []
         );
     }
@@ -447,17 +421,9 @@ class MailManager implements FactoryContract
         // Here we will check if the "driver" key exists and if it does we will use
         // the entire mail configuration file as the "driver" config in order to
         // provide "BC" for any Laravel <= 6.x style mail configuration files.
-        $config = $this->app['config']['mail.driver']
+        return $this->app['config']['mail.driver']
             ? $this->app['config']['mail']
             : $this->app['config']["mail.mailers.{$name}"];
-
-        if (isset($config['url'])) {
-            $config = array_merge($config, (new ConfigurationUrlParser)->parseConfiguration($config));
-
-            $config['transport'] = Arr::pull($config, 'driver');
-        }
-
-        return $config;
     }
 
     /**

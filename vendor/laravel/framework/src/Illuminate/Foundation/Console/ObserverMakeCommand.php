@@ -20,6 +20,17 @@ class ObserverMakeCommand extends GeneratorCommand
     protected $name = 'make:observer';
 
     /**
+     * The name of the console command.
+     *
+     * This name is used to identify the command during lazy loading.
+     *
+     * @var string|null
+     *
+     * @deprecated
+     */
+    protected static $defaultName = 'make:observer';
+
+    /**
      * The console command description.
      *
      * @var string
@@ -151,7 +162,7 @@ class ObserverMakeCommand extends GeneratorCommand
      */
     protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output)
     {
-        if ($this->isReservedName($this->getNameInput()) || $this->didReceiveOptions($input)) {
+        if ($this->didReceiveOptions($input)) {
             return;
         }
 

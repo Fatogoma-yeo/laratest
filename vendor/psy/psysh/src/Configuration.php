@@ -127,7 +127,6 @@ class Configuration
     private $presenter;
     private $autoCompleter;
     private $checker;
-    /** @deprecated */
     private $prompt;
     private $configPaths;
 
@@ -147,8 +146,6 @@ class Configuration
             $this->configFile = $config['configFile'];
         } elseif (isset($_SERVER['PSYSH_CONFIG']) && $_SERVER['PSYSH_CONFIG']) {
             $this->configFile = $_SERVER['PSYSH_CONFIG'];
-        } elseif (\PHP_SAPI === 'cli-server' && ($configFile = \getenv('PSYSH_CONFIG'))) {
-            $this->configFile = $configFile;
         }
 
         // legacy baseDir option
@@ -1631,19 +1628,11 @@ class Configuration
     /**
      * Set the prompt.
      *
-     * @deprecated The `prompt` configuration has been replaced by Themes and support will
-     * eventually be removed. In the meantime, prompt is applied first by the Theme, then overridden
-     * by any explicitly defined prompt.
-     *
-     * Note that providing a prompt but not a theme config will implicitly use the `classic` theme.
+     * @param string $prompt
      */
     public function setPrompt(string $prompt)
     {
         $this->prompt = $prompt;
-
-        if (isset($this->theme)) {
-            $this->theme->setPrompt($prompt);
-        }
     }
 
     /**
@@ -1687,10 +1676,6 @@ class Configuration
 
         $this->theme = $theme;
 
-        if (isset($this->prompt)) {
-            $this->theme->setPrompt($this->prompt);
-        }
-
         if (isset($this->output)) {
             $this->output->setTheme($theme);
             $this->applyFormatterStyles();
@@ -1703,12 +1688,7 @@ class Configuration
     public function theme(): Theme
     {
         if (!isset($this->theme)) {
-            // If a prompt is explicitly set, and a theme is not, base it on the `classic` theme.
-            $this->theme = $this->prompt ? new Theme('classic') : new Theme();
-        }
-
-        if (isset($this->prompt)) {
-            $this->theme->setPrompt($this->prompt);
+            $this->theme = new Theme();
         }
 
         return $this->theme;

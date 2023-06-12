@@ -26,28 +26,33 @@ use PhpParser\NodeVisitorAbstract;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
- *
- * @psalm-import-type LinesType from \SebastianBergmann\CodeCoverage\StaticAnalysis\FileAnalyser
  */
 final class ExecutableLinesFindingVisitor extends NodeVisitorAbstract
 {
-    private int $nextBranch = 0;
-    private readonly string $source;
+    /**
+     * @var int
+     */
+    private $nextBranch = 0;
 
     /**
-     * @psalm-var LinesType
+     * @var string
      */
-    private array $executableLinesGroupedByBranch = [];
+    private $source;
 
     /**
-     * @psalm-var array<int, bool>
+     * @var array<int, int>
      */
-    private array $unsets = [];
+    private $executableLinesGroupedByBranch = [];
 
     /**
-     * @psalm-var array<int, string>
+     * @var array<int, bool>
      */
-    private array $commentsToCheckForUnset = [];
+    private $unsets = [];
+
+    /**
+     * @var array<int, string>
+     */
+    private $commentsToCheckForUnset = [];
 
     public function __construct(string $source)
     {
@@ -83,20 +88,12 @@ final class ExecutableLinesFindingVisitor extends NodeVisitorAbstract
             return;
         }
 
-        if ($node instanceof Node\Stmt\Interface_) {
-            foreach (range($node->getStartLine(), $node->getEndLine()) as $line) {
-                $this->unsets[$line] = true;
-            }
-
-            return;
-        }
-
         if ($node instanceof Node\Stmt\Declare_ ||
             $node instanceof Node\Stmt\DeclareDeclare ||
             $node instanceof Node\Stmt\Else_ ||
             $node instanceof Node\Stmt\EnumCase ||
             $node instanceof Node\Stmt\Finally_ ||
-            $node instanceof Node\Stmt\GroupUse ||
+            $node instanceof Node\Stmt\Interface_ ||
             $node instanceof Node\Stmt\Label ||
             $node instanceof Node\Stmt\Namespace_ ||
             $node instanceof Node\Stmt\Nop ||
@@ -355,9 +352,6 @@ final class ExecutableLinesFindingVisitor extends NodeVisitorAbstract
         );
     }
 
-    /**
-     * @psalm-return LinesType
-     */
     public function executableLinesGroupedByBranch(): array
     {
         return $this->executableLinesGroupedByBranch;

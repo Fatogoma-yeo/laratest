@@ -9,6 +9,10 @@ export default function ForgotPassword({ status }) {
         email: '',
     });
 
+    const onHandleChange = (event) => {
+        setData(event.target.name, event.target.value);
+    };
+
     const submit = (e) => {
         e.preventDefault();
 
@@ -28,19 +32,19 @@ export default function ForgotPassword({ status }) {
 
             <form onSubmit={submit}>
                 <TextInput
-                    id="email"
+                    id="password"
                     type="email"
                     name="email"
                     value={data.email}
                     className="mt-1 block w-full"
                     isFocused={true}
-                    onChange={(e) => setData('email', e.target.value)}
+                    handleChange={onHandleChange}
                 />
 
                 <InputError message={errors.email} className="mt-2" />
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ml-4" disabled={processing}>
+                    <PrimaryButton className="ml-4" processing={processing}>
                         Email Password Reset Link
                     </PrimaryButton>
                 </div>

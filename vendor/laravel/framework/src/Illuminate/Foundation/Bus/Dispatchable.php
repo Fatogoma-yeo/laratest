@@ -77,6 +77,18 @@ trait Dispatchable
     }
 
     /**
+     * Dispatch a command to its appropriate handler in the current process.
+     *
+     * @return mixed
+     *
+     * @deprecated Will be removed in a future Laravel version.
+     */
+    public static function dispatchNow(...$arguments)
+    {
+        return app(Dispatcher::class)->dispatchNow(new static(...$arguments));
+    }
+
+    /**
      * Dispatch a command to its appropriate handler after the current process.
      *
      * @param  mixed  ...$arguments
@@ -84,7 +96,7 @@ trait Dispatchable
      */
     public static function dispatchAfterResponse(...$arguments)
     {
-        return self::dispatch(...$arguments)->afterResponse();
+        return app(Dispatcher::class)->dispatchAfterResponse(new static(...$arguments));
     }
 
     /**

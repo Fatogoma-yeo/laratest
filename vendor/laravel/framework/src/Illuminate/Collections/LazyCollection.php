@@ -16,8 +16,7 @@ use Traversable;
 
 /**
  * @template TKey of array-key
- *
- * @template-covariant TValue
+ * @template TValue
  *
  * @implements \Illuminate\Support\Enumerable<TKey, TValue>
  */
@@ -431,7 +430,9 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
     public function filter(callable $callback = null)
     {
         if (is_null($callback)) {
-            $callback = fn ($value) => (bool) $value;
+            $callback = function ($value) {
+                return (bool) $value;
+            };
         }
 
         return new static(function () use ($callback) {
@@ -1499,7 +1500,9 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
         /** @var callable(TValue, TKey): bool $callback */
         $callback = $this->useAsCallable($value) ? $value : $this->equality($value);
 
-        return $this->takeUntil(fn ($item, $key) => ! $callback($item, $key));
+        return $this->takeUntil(function ($item, $key) use ($callback) {
+            return ! $callback($item, $key);
+        });
     }
 
     /**
@@ -1517,16 +1520,6 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
                 yield $key => $value;
             }
         });
-    }
-
-    /**
-     * Flatten a multi-dimensional associative array with dots.
-     *
-     * @return static
-     */
-    public function dot()
-    {
-        return $this->passthru('dot', []);
     }
 
     /**
@@ -1726,6 +1719,6 @@ class LazyCollection implements CanBeEscapedWhenCastToString, Enumerable
      */
     protected function now()
     {
-        return Carbon::now()->timestamp;
+        return time();
     }
 }

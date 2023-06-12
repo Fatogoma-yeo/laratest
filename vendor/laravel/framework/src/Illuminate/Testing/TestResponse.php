@@ -1657,6 +1657,8 @@ class TestResponse implements ArrayAccess
     {
         $property = new ReflectionProperty($exception, 'message');
 
+        $property->setAccessible(true);
+
         $property->setValue(
             $exception,
             $exception->getMessage().PHP_EOL.PHP_EOL.$message.PHP_EOL
@@ -1680,7 +1682,7 @@ class TestResponse implements ArrayAccess
      * Proxy isset() checks to the underlying base response.
      *
      * @param  string  $key
-     * @return bool
+     * @return mixed
      */
     public function __isset($key)
     {

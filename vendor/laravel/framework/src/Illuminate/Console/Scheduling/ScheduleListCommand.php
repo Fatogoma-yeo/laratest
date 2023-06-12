@@ -27,6 +27,17 @@ class ScheduleListCommand extends Command
     ';
 
     /**
+     * The name of the console command.
+     *
+     * This name is used to identify the command during lazy loading.
+     *
+     * @var string|null
+     *
+     * @deprecated
+     */
+    protected static $defaultName = 'schedule:list';
+
+    /**
      * The console command description.
      *
      * @var string
@@ -196,7 +207,9 @@ class ScheduleListCommand extends Command
      */
     private function getClosureLocation(CallbackEvent $event)
     {
-        $callback = (new ReflectionClass($event))->getProperty('callback')->getValue($event);
+        $callback = tap((new ReflectionClass($event))->getProperty('callback'))
+                        ->setAccessible(true)
+                        ->getValue($event);
 
         if ($callback instanceof Closure) {
             $function = new ReflectionFunction($callback);
