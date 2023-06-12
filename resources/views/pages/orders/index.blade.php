@@ -67,7 +67,7 @@
                                     <tbody>
                                         <tr class="border-b">
                                             <td class="whitespace-nowrap border-r px-4 py-2">
-                                                <a @click="userselectmodal()" class="cursor-pointer outline-none border-dashed py-1 border-b-2 border-blue-400 text-sm" id="selectuser">{{ __( 'Customer' ) }}: <span class="font-bold" id="pos_customer"></span></a>
+                                                <a @click="userselectmodal()" class="cursor-pointer outline-none border-dashed py-1 border-b-2 border-blue-400 text-sm" id="selectuser">{{ __( 'Customer' ) }}: <span class="font-bold" id="pos_customer">N/A</span></a>
                                             </td>
                                             <td class="whitespace-nowrap border-r px-4 py-2">
                                                 {{ __( 'Sub Total' ) }}
