@@ -29,6 +29,7 @@
         <x-key-modal><x-check-modal /></x-key-modal>
         <x-edit-modal />
         <x-pos-discount-popup />
+        <x-pos-pending-orders-popup />
         <x-pos-order-products-popup />
         <x-user-modal><x-pos-user-modal /></x-user-modal>
         <x-user-select-modal><x-pos-user-select /></x-user-select-modal>
