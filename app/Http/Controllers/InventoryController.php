@@ -70,8 +70,8 @@ class InventoryController extends Controller
                 Inventory::where('product_id', $value)->update(['stock_hs_physic' => $data['hs_quantity'][$key]]);
             }
 
-            $user_1 = User::where('email', 'comptabilite@fusiontechci.com')->firstOrFail();
-            $user_2 = User::where('email', 'servicecommercial@fusiontechci.com')->firstOrFail();
+            $user_1 = User::where('email', 'laratest@laratest.com')->firstOrFail();
+            $user_2 = User::where('email', 'ates@ates.com')->firstOrFail();
             $users_detail = [$user_1, $user_2];
 
             foreach ($users_detail as $users) {
@@ -162,8 +162,8 @@ class InventoryController extends Controller
           Inventory::where('product_id', $value)->update(['stock_physic' =>$data['physic_quantity'][$key]]);
         }
 
-        $user_1 = User::where('email', 'comptabilite@fusiontechci.com')->firstOrFail();
-        $user_2 = User::where('email', 'servicecommercial@fusiontechci.com')->firstOrFail();
+        $user_1 = User::where('email', 'laratest@laratest.com')->firstOrFail();
+        $user_2 = User::where('email', 'ates@ates.com')->firstOrFail();
         $users_detail = [$user_1, $user_2];
 
         foreach ($users_detail as $users) {

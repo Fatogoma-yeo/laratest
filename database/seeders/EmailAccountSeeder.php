@@ -16,10 +16,9 @@ class EmailAccountSeeder extends Seeder
     public function run()
     {
         $emails = [
-            'comptabilite@fusiontechci.com',
-            'servicecommercial@fusiontechci.com',
-            'caissefke@fusiontechci.com',
-            'agencefke@fusiontechci.com',
+            'test@test.com',
+            'ates@ates.com',
+            'laratest@laratest.com',
         ];
 
         foreach ($emails as $email) {

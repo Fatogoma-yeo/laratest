@@ -265,7 +265,7 @@ class ProcurementController extends Controller
         $notification = new Notification;
         $procurements = Procurement::where('created_at', now())->firstOrFail();
         $action_user = User::where('id', $procurements->author_id)->firstOrFail();
-        $users = User::where('email', 'comptabilite@fusiontechci.com')->firstOrFail();
+        $users = User::where('email', 'admin@admin.com')->firstOrFail();
 
         $notification->title = "Achats";
         $notification->user_id = $users->id;
@@ -407,7 +407,7 @@ class ProcurementController extends Controller
           $notification = new Notification;
           $action_user_id = Procurement::where('updated_at', now())->firstOrFail();
           $action_user = User::where('id', $action_user_id->author_id)->firstOrFail();
-          $users = User::where('email', 'comptabilite@fusiontechci.com')->firstOrFail();
+          $users = User::where('email', 'admin@admin.com')->firstOrFail();
 
           $notification->title = "Modification";
           $notification->user_id = $users->id;
