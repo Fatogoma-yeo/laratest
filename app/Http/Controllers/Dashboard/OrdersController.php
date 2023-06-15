@@ -136,7 +136,7 @@ class OrdersController extends Controller
                         $output .= '<div class="relative border border-r-0 border-t-0" x-data=""
                                         x-on:click.prevent="$dispatch(\'open-modal\', \'confirm-product\')" onclick="getproductfunc(this)">
                                         <a href="#">
-                                            <input type="text" class="hidden" name="product_id" id="product_id" value='.$product->id.'  >';
+                                            <input type="text" class="hidden" name="product_id" id="product_id" value='.$products->id.'  >';
 
                         if($products->media){
                             $output .= '<img src='.$products->media.' class="h-full object-cover" alt="Image Produits" />';
@@ -197,7 +197,7 @@ class OrdersController extends Controller
                         $output .= '<div class="relative border border-r-0 border-t-0" x-data=""
                                         x-on:click.prevent="$dispatch(\'open-modal\', \'confirm-product\')" onclick="getproductfunc(this)">
                                         <a href="#">
-                                            <input type="text" class="hidden" name="product_id" id="product_id" value='.$product->id.'  >';
+                                            <input type="text" class="hidden" name="product_id" id="product_id" value='.$products->id.'  >';
 
                         if($products->media){
                             $output .= '<img src='.$products->media.' class="h-full object-cover" alt="Image Produits" />';
