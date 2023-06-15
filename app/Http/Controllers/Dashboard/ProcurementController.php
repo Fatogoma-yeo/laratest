@@ -240,7 +240,7 @@ class ProcurementController extends Controller
 
         $notification = new Notification;
         $action_user = User::where('id', $procurementDetail->author_id)->firstOrFail();
-        $users = User::where('email', 'admin@fusiontechci.com')->firstOrFail();
+        $users = User::where('email', 'admin@admin.com')->firstOrFail();
 
         $notification->title = "Achats";
         $notification->user_id = $users->id;
