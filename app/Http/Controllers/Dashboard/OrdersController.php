@@ -390,8 +390,11 @@ class OrdersController extends Controller
 
             $customersDetail = Client::where('name', 'LIKE', '%'.$data["customer"].'%')->firstOrFail();
 
+            $date_generate = DATE_FORMAT(now(), 'dmy');
+
             $orders = new Orders;
 
+            $orders->code = $date_generate.'-00'.rand(1,9);
             $orders->payment_status = "paid";
             $orders->discount = $data['discount'];
             $orders->subtotal = $data['subtotal'];
@@ -536,6 +539,8 @@ class OrdersController extends Controller
 
         $customersDetail = Client::where('name', 'LIKE', '%'.$data["customer"].'%')->firstOrFail();
 
+        $date_generate = DATE_FORMAT(now(), 'dmy');
+
         if ($data['orders_id'] != '') {
 
             Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
@@ -549,6 +554,7 @@ class OrdersController extends Controller
         }else {
             $order = new Orders;
 
+            $order->code = $date_generate.'-00'.rand(1,9);
             $order->payment_status = "paid";
             $order->discount = $data['discount'];
             $order->subtotal = $data['subtotal'];
@@ -672,8 +678,6 @@ class OrdersController extends Controller
 
 
         $cash_flows = new CashFlow;
-
-        $date_generate = DATE_FORMAT(now(), 'dmy');
 
         $cash_flows->name = $date_generate.'-00'.rand(1,9);
         $cash_flows->order_id = $orders->id;
