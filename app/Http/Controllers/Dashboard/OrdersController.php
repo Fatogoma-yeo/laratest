@@ -642,7 +642,35 @@ class OrdersController extends Controller
         }
     }
 
-    
+    public function previewPartialOrderProducts(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+
+            $output = '';
+            $order_product_detail = OrderProduct::where('orders_id', $data['orders_id'])->get();
+            $categoryLabel = __( 'Category' );
+
+            foreach ($order_product_detail as $products) {
+                $product_det = Product::with('category')->where('id', $products->product_id)->firstOrFail();
+                $output .= '<div class="item">
+                              <div class="flex-col border-b border-info-primary py-2">
+                                  <div class="title font-semibold text-primary flex justify-between">
+                                      <span>'.$products->product_name.' (x'.$products->quantity.')</span>
+                                      <span>'.$this->currency($products->pos_subtotal).'</span>
+                                  </div>
+                                  <div class="text-sm text-primary">
+                                      <ul>
+                                          <li>'.$categoryLabel.' : '.$product_det->category->name.'</li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>';
+            }
+
+          return Response($output);
+        }
+    }
 
     public function cancelOrders(Request $request)
     {
