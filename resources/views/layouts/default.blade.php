@@ -31,6 +31,7 @@
         <x-pos-discount-popup />
         <x-pos-pending-orders-popup />
         <x-pos-order-products-popup />
+        <x-pos-order-partial-products-popup />
         <x-pos-instalment-popup />
         <x-user-modal><x-pos-user-modal /></x-user-modal>
         <x-user-select-modal><x-pos-user-select /></x-user-select-modal>

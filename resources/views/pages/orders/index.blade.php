@@ -225,6 +225,11 @@
         x.style.overflow = "auto";
     }
 
+    function orderPartialProductModalclosefun() {
+        document.getElementById('order-partial-products-modal').style.display = "none";
+        x.style.overflow = "auto";
+    }
+
     function userselectmodal() {
         var ids = document.getElementById('selectuser');
         if (ids) {
@@ -313,8 +318,6 @@
                 save_pos_condition();
                 document.getElementById('total_value').textContent = total;
                 document.getElementById('discount_value').textContent = totalDiscount;
-                document.getElementById('order_total').textContent = current.format(total);
-                document.getElementById('mini_paid').textContent = current.format(total * 0.5);
             }
         }else {
             $('#notifDiv').fadeIn();

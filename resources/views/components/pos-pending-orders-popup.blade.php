@@ -139,5 +139,19 @@ $maxWidth = [
         });
         document.getElementById('order-products-modal').style.display = "flex";
     }
+
+    function previewPartialOrder(id) {
+        document.getElementById('preview_partial_order_id').innerText = id;
+        $.ajax({
+            type: "get",
+            url: "{{ route('preview_partial.order') }}",
+            data: {"orders_id": id},
+            success: function (response) {
+            $('#previewPartialOrderProducts').html(response);
+            }
+        });
+        document.getElementById('order-partial-products-modal').style.display = "flex";
+    }
+
 </script>
 @endpush
