@@ -27,18 +27,18 @@
 
 @push('javascript')
     <script>
-        var cash =document.getElementById("payment");
+        var payment_cash =document.getElementById("payment");
 
         function keys(v){
-            cash.value+=v;
+            payment_cash.value+=v;
         }
 
-        function cancels(){
-            cash.value="";
+        function cancelkey(){
+            payment_cash.value="";
         }
 
         function removekeys(){
-            cash.value = cash.value.substr(0,cash.value.length-1);
+            payment_cash.value = payment_cash.value.substr(0,payment_cash.value.length-1);
         }
     </script>
 @endpush
