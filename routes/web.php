@@ -56,7 +56,6 @@ Route::group(['prefix' => '/', 'middleware' => ['auth', 'verified']], function (
     Route::get('proceed-paid', [OrdersController::class, 'proceedPaidOrder'])->name('proceed.paid-order');
     Route::get('orders-detail', [OrdersController::class, 'ordersDetail'])->name('orders.detail');
     Route::get('preview', [OrdersController::class, 'previewOrderProducts'])->name('preview.order');
-    Route::get('preview_partial', [OrdersController::class, 'previewPartialOrderProducts'])->name('preview_partial.order');
     Route::get('cancel-order', [OrdersController::class, 'cancelOrders'])->name('cancel-order.pending');
     Route::get('quantity', [OrdersController::class, 'changeQuantity'])->name('quantity.change');
     Route::get('popup', [OrdersController::class, 'discount'])->name('popup.discount');
