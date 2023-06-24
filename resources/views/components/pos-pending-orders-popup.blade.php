@@ -68,8 +68,7 @@ $maxWidth = [
                           </div>
                       </div>
                       <div class="overflow-y-auto flex flex-auto">
-                          <div class="flex p-2 flex-auto flex-col overflow-y-auto items-center justify-center">
-                              <h3 class="text-semibold flex justify-center">{{ __( 'Nothing to display...' ) }}</h3>
+                          <div class="flex p-2 flex-auto flex-col overflow-y-auto" id="partial_pending_products">
                           </div>
                       </div>
                   </div>
@@ -107,6 +106,23 @@ $maxWidth = [
               document.getElementById('pending-orders-modal').style.display = "none";
               x.style.overflow = "auto";
 
+          }
+      });
+    }
+
+    function proceedPaidOrder(id) {
+      $.ajax({
+          type: 'get',
+          url: "{{ route('orders.detail')}}",
+          data: {"order_id": id},
+          success: function (response) {
+              var orders = response.orders;
+              document.getElementById('instalment_total').innerText = current.format(orders.total);
+              document.getElementById('instalment_paid').innerText = current.format(orders.tendered);
+              document.getElementById('instalment_discount').innerText = current.format(orders.discount);
+              document.getElementById('instalment_change').innerText = current.format(Math.abs(orders.change));
+              document.getElementById('instalment-modal').style.display = 'flex';
+              document.getElementById('id_for_order').innerText = id;
           }
       });
     }
