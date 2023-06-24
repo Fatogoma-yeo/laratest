@@ -313,6 +313,8 @@
                 save_pos_condition();
                 document.getElementById('total_value').textContent = total;
                 document.getElementById('discount_value').textContent = totalDiscount;
+                document.getElementById('order_total').textContent = current.format(total);
+                document.getElementById('mini_paid').textContent = current.format(total * 0.5);
             }
         }else {
             $('#notifDiv').fadeIn();
