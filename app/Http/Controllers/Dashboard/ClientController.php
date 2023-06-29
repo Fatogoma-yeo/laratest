@@ -207,7 +207,7 @@ class ClientController extends Controller
                   foreach ($customer_order_histories as $key => $orders) {
                          $output .='                <tbody class="text-primary">
                                                         <tr>
-                                                            <td colspan="3" class="border p-2 text-center border border-gray-800">
+                                                            <td colspan="3" class="p-2 text-center border border-gray-800">
                                                                 <div class="flex flex-col items-start">
                                                                     <h3 class="font-bold">'.$code.': '.$orders->code.'</h3>
                                                                     <div class="md:-mx-2 w-full flex flex-row md:flex-row">
@@ -234,7 +234,7 @@ class ClientController extends Controller
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td class="border p-2 text-center border border-gray-800">
+                                                            <td class="p-2 text-center border border-gray-800">
                                                                 <button @click="openOrderOptions()" class="rounded-full h-8 px-2 flex items-center justify-center border border-gray hover:bg-green-600 hover:text-white">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
