@@ -947,7 +947,7 @@ class OrdersController extends Controller
             $productHistories->product_name = $productDetail["product_name"][$key];
             $productHistories->procurement_name = "N/A";
             $productHistories->product_id = $value;
-            $productHistories->order_id = $ProductOrderDetails->id;
+            $productHistories->order_id = $Orders->id;
             $productHistories->operation = __('Sold');
             $productHistories->before_quantity = $ProductHistoryDetails->after_quantity;
             $productHistories->quantity = $productDetail["product_quantity"][$key];
