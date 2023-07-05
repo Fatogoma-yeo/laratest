@@ -90,6 +90,8 @@ Route::middleware('auth')->group(function ()
   Route::match(['get', 'post'], 'inventory/stock-validate', [InventoryController::class, 'inventoryStockValidate'])->name('inventory.stock-validate');
   Route::get('inventory/stock-hs', [InventoryController::class, 'inventoryStockHs'])->name('inventory.stock-hs');
 
+  Route::resource('instalments', InstalmentController::class);
+
 });
 
 Route::middleware('auth')->group(function ()
