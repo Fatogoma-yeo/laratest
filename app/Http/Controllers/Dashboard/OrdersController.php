@@ -104,7 +104,7 @@ class OrdersController extends Controller
             $products_Detail = Product::with('procurement')->where('name','LIKE','%'.$request->pos_search."%")->get();
 
             if ($request->pos_search != '') {
-              
+
                 foreach ($products_Detail as $products) {
                     if (count($products->procurement) > 0) {
                         foreach ($products->procurement->unique(fn ($p) => $p->gross_purchase_price) as $product) {
@@ -380,7 +380,7 @@ class OrdersController extends Controller
             $History_product = ProductHistory::where('product_id', $data['product_id'])->latest()->firstOrFail();
             if ($History_product->after_quantity >= $data['quantity']) {
                 PosList::where(['product_id' => $data['product_id'], 'author_id' => Auth::id()])->update(['quantity' => $data['quantity']]);
-    
+
                 $productsDetails = PosList::where('author_id', Auth::id())->get();
                 $productsDetails = json_decode($productsDetails, true);
                 return view('pages.orders.products', compact('productsDetails'));
@@ -467,7 +467,7 @@ class OrdersController extends Controller
 
             $date_generate = DATE_FORMAT(now(), 'dmy');
 
-            $detail_for_order = Orders::where(['customer_id' =>$customersDetail->id, 'author' =>Auth::id()])->first();
+            $detail_for_order = Orders::where(['customer_id' =>$customersDetail->id, 'author' =>Auth::id(), 'payment_status' => 'hold'])->first();
 
             if (!$detail_for_order) {
                 $orders = new Orders;
@@ -738,7 +738,7 @@ class OrdersController extends Controller
         }
 
         $users = User::get();
-        $orders = Orders::where('payment_status', 'paid')->get();
+        $orders = Orders::where('payment_status', '!=', 'Annulé')->where('payment_status', '!=', 'hold')->get();
         return view('pages.orders.void_order', compact('users', 'orders'));
     }
 
@@ -775,9 +775,26 @@ class OrdersController extends Controller
                 $productHistories->save();
             }
 
+            if ($order_detail->payment_status == 'partially_paid') {
+                $order_instalment = OrderInstalment::where('order_id', $request->order_id)->firstOrFail();
+                $order_change = $order_detail->change + $order_instalment->amount_unpaid;
+                $order_tendered = $order_detail->tendered + $order_instalment->amount_unpaid;
+
+                Orders::where(['id' =>$request->order_id, 'author' =>$order_detail->author])
+                ->update([
+                  "payment_status" =>$status,
+                  "tendered" =>$order_tendered,
+                  "change" =>$order_change
+                ]);
+
+                OrderInstalment::where('order_id', $request->order_id)->delete();
+                OrderPayment::where('order_id', $request->order_id)->delete();
+            }else {
+                Orders::where(['id' =>$request->order_id, 'author' =>$order_detail->author])->update(["payment_status" =>$status]);
+            }
+
             CashFlow::where(['order_id' =>$request->order_id, 'author_id' =>$order_detail->author])->update(["status" =>"inactive"]);
             OrderProduct::where(['orders_id' =>$request->order_id, 'author_id' =>$order_detail->author])->update(["status" =>$status]);
-            Orders::where(['id' =>$request->order_id, 'author' =>$order_detail->author])->update(["payment_status" =>$status]);
 
         }
     }
@@ -1002,7 +1019,7 @@ class OrdersController extends Controller
             $purchases_amout = $before_purchases_amount + $orders->total;
         }
         Client::where('name', 'LIKE', '%'.$data["customer"].'%')->update(['purchases_amount' => $purchases_amout]);
-        
+
         return redirect()->back()->with(['status' => 'orders-store', 'success' => 'Commande placée avec succès !']);
     }
 
