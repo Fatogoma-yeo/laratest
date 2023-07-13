@@ -25,10 +25,15 @@ class DashboardController extends Controller
     {
         $userDetails = User::get();
 
-        $current_days = Orders::whereDay('created_at', Carbon::now())
+        $current_day = Orders::whereDay('created_at', Carbon::now())
         ->where('tendered', '!=', 0)
         ->where('payment_status', '!=', 'Annulé')
         ->select(
+            DB::raw('SUM(tendered) as total_sales')
+        )
+        ->get();
+
+        $current_days = Orders::select(
             DB::raw('SUM(tendered) as total_sales')
         )
         ->get();
@@ -120,6 +125,6 @@ class DashboardController extends Controller
 
         $customersDetails = Client::orderBy('purchases_amount', 'DESC')->limit(10)->get();
 
-        return view('dashboard', compact('current_days','order_sammary','day_of_currentweek_detail','day_of_lastweek_detail', 'userDetails', 'customersDetails', 'expense_sammary', 'expenses', 'defective_sammary', 'defectives', 'instalment_sammary', 'instalments'));
+        return view('dashboard', compact('current_days', 'current_day','order_sammary','day_of_currentweek_detail','day_of_lastweek_detail', 'userDetails', 'customersDetails', 'expense_sammary', 'expenses', 'defective_sammary', 'defectives', 'instalment_sammary', 'instalments'));
     }
 }
