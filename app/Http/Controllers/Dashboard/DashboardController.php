@@ -25,8 +25,8 @@ class DashboardController extends Controller
     {
         $userDetails = User::get();
 
-        $current_days = Orders::where(['payment_status' => 'paid', 'payment_status' => 'partially_paid' ])
-        ->whereDate('created_at', date('Y-m-d'))
+        $current_days = Orders::whereDay('created_at', Carbon::now())
+        ->where(['payment_status' => 'paid', 'payment_status' => 'partially_paid' ])
         ->select(
             DB::raw('SUM(tendered) as total_sales')
         )
