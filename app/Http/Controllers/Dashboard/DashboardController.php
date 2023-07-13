@@ -28,10 +28,8 @@ class DashboardController extends Controller
         $current_days = Orders::where(['payment_status' => 'paid', 'payment_status' => 'partially_paid' ])
         ->whereDate('created_at', date('Y-m-d'))
         ->select(
-            DB::raw('SUM(tendered) as total_sales'),
-            DB::raw('DATE_FORMAT(created_at,"%W") as day')
+            DB::raw('SUM(tendered) as total_sales')
         )
-        ->groupBy('day')
         ->get();
         // if ($current_days !== null) {
         //     $current_day = $current_days;
