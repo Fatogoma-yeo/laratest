@@ -94,12 +94,11 @@ class DashboardController extends Controller
         )
         ->get();
 
-        $defective_sammary = ProductHistory::where(['created_at'=> Carbon::now(), 'operation' => __('Defective')])
+        $defective_sammary = ProductHistory::whereDay('created_at', Carbon::now())
+        ->where('operation', __('Defective'))
         ->select(
-            DB::raw('SUM(total_price) as total'),
-            DB::raw('DATE_FORMAT(created_at,"%W") as day')
+            DB::raw('SUM(total_price) as total')
         )
-        ->groupBy('day')
         ->get();
 
         $defectives = ProductHistory::where('operation', __('Defective'))
