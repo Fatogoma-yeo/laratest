@@ -33,7 +33,9 @@ class DashboardController extends Controller
         )
         ->get();
 
-        $current_days = Orders::select(
+        $current_days = Orders::where('tendered', '!=', 0)
+        ->where('payment_status', '!=', 'Annulé')
+        ->select(
             DB::raw('SUM(tendered) as total_sales')
         )
         ->get();
