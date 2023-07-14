@@ -40,7 +40,7 @@
             </ul>
             <div class="bg-white rounded-md shadow-lg px-4 w-full">
                 <div  x-show="openTab === 1" class="">
-                    <div class="grid grid-cols-3 gap-4 pb-8">
+                    <div class="grid md:grid-cols-3 gap-4 pb-8">
                         <!-- Invoice Number -->
                         <div class="col-span-1 mt-4">
                             <x-input-label for="invoice_number" :value="__('N° Facture')" />
@@ -66,7 +66,7 @@
                         <!-- Provider -->
                         <div class="col-span-1 mt-4">
                             <x-input-label for="porvider_id" :value="__('Founisseur')" required/>
-                            <select name="provider_id" id="provider_id" class="mt-1 block w-full py-2 px-3 border-gray-300 bg-gray-100 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" >
+                            <select name="provider_id" id="provider_id" class="mt-1 block w-full py-2 px-3 border-gray-300 bg-gray-100 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" onblur="procurmentNameGeneretor(this)">
                                 <option value=""></option>
                                     @foreach($providers as $provider)
                                         <option value="{{ $provider->id}}">{{ $provider->name }}</option>
