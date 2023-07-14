@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ExpensesCategoriesController;
 use App\Http\Controllers\Dashboard\ExpensesController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InstalmentController;
 use App\Http\Controllers\NotificationController;
 use App\Mail\OwnerNotificate;
 
