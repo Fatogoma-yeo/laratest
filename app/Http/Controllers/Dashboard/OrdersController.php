@@ -829,14 +829,28 @@ class OrdersController extends Controller
 
         if ($data['orders_id'] != '') {
 
-            Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
-            ->update([
-              "payment_status" => "paid",
-              "discount" => $data["discount"],
-              "subtotal" => $data["subtotal"],
-              "tendered" => $data["total"],
-              "change" => 0,
-            ]);
+            if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
+
+                Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
+                ->update([
+                  "payment_status" => "partially_paid",
+                  "discount" => $data["discount"],
+                  "subtotal" => $data["subtotal"],
+                  "tendered" => $data["cash_value"],
+                  "change" => $data['cash_value'] - $data['total'],
+                ]);
+
+            }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
+
+                Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
+                ->update([
+                  "payment_status" => "paid",
+                  "discount" => $data["discount"],
+                  "subtotal" => $data["subtotal"],
+                  "tendered" => $data["total"],
+                  "change" => 0,
+                ]);
+            }
 
         }elseif ($data['orders_id'] == '') {
             $order = new Orders;
