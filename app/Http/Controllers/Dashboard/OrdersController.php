@@ -840,6 +840,10 @@ class OrdersController extends Controller
                   "change" => $data['cash_value'] - $data['total'],
                 ]);
 
+                $before_owed_amount = $customersDetail->owed_amount;
+                $owed_amount = $before_owed_amount + ($data['total'] - $data['cash_value']);
+                Client::where('name', 'LIKE', '%'.$data["customer"].'%')->update(['owed_amount' => $owed_amount]);
+
             }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
 
                 Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
