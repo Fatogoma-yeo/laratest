@@ -827,8 +827,6 @@ class OrdersController extends Controller
 
         $date_generate = DATE_FORMAT(now(), 'dmy');
 
-        $before_purchases_amount = $customersDetail->purchases_amount;
-
         if ($data['orders_id'] != '') {
 
             Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
@@ -839,12 +837,6 @@ class OrdersController extends Controller
               "tendered" => $data["total"],
               "change" => 0,
             ]);
-            
-            if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
-                $purchases_amout = $before_purchases_amount + $orders->tendered;
-            }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
-                $purchases_amout = $before_purchases_amount + $orders->total;
-            }
 
         }elseif ($data['orders_id'] == '') {
             $order = new Orders;
@@ -1019,6 +1011,13 @@ class OrdersController extends Controller
         // echo "</pre>"; print_r($date_generate); die;
 
         $before_purchases_amount = $customersDetail->purchases_amount;
+        if ($data['order_id'] != '') {
+            if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
+                $purchases_amout = $before_purchases_amount + $orders->tendered;
+            }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
+                $purchases_amout = $before_purchases_amount + $orders->total;
+            }
+        }
         if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
             $purchases_amout = $before_purchases_amount + $orders->tendered;
         }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
