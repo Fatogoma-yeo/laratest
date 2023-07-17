@@ -838,6 +838,13 @@ class OrdersController extends Controller
               "change" => 0,
             ]);
 
+            $before_purchases_amount = $customersDetail->purchases_amount;
+            if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
+                $purchases_amout = $before_purchases_amount + $orders->tendered;
+            }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
+                $purchases_amout = $before_purchases_amount + $orders->total;
+            }
+
         }elseif ($data['orders_id'] == '') {
             $order = new Orders;
             $order_instalment = new OrderInstalment;
@@ -1009,11 +1016,6 @@ class OrdersController extends Controller
         $cash_flows->save();
 
         // echo "</pre>"; print_r($date_generate); die;
-
-        // $category = ProductCategory::get();
-        // foreach ($category as $cat) {
-        //     $categoryDetail = $cat;
-        // }
 
         $before_purchases_amount = $customersDetail->purchases_amount;
         if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
