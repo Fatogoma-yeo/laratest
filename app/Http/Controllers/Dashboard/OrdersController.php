@@ -831,6 +831,7 @@ class OrdersController extends Controller
 
             Orders::where(['id' => $data['orders_id'], 'author' => Auth::id()])
             ->update([
+              "payment_status" => "paid",
               "discount" => $data["discount"],
               "subtotal" => $data["subtotal"],
               "tendered" => $data["total"],
@@ -1009,10 +1010,10 @@ class OrdersController extends Controller
 
         // echo "</pre>"; print_r($date_generate); die;
 
-        $category = ProductCategory::get();
-        foreach ($category as $cat) {
-            $categoryDetail = $cat;
-        }
+        // $category = ProductCategory::get();
+        // foreach ($category as $cat) {
+        //     $categoryDetail = $cat;
+        // }
 
         $before_purchases_amount = $customersDetail->purchases_amount;
         if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
