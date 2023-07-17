@@ -1011,13 +1011,6 @@ class OrdersController extends Controller
         // echo "</pre>"; print_r($date_generate); die;
 
         $before_purchases_amount = $customersDetail->purchases_amount;
-        if ($data['order_id'] != '') {
-            if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
-                $purchases_amout = $before_purchases_amount + $orders->tendered;
-            }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
-                $purchases_amout = $before_purchases_amount + $orders->total;
-            }
-        }
         if ($data['cash_value'] != '' && $data['cash_value'] < $data['total']) {
             $purchases_amout = $before_purchases_amount + $orders->tendered;
         }elseif ($data['cash_value'] == '' || $data['cash_value'] == $data['total']) {
