@@ -25,7 +25,7 @@ class DashboardController extends Controller
     {
         $userDetails = User::get();
 
-        $current_day = Orders::whereDate('created_at', date('Y-m-d'))
+        $current_day = Orders::whereDay('created_at', Carbon::now())
         ->where('tendered', '!=', 0)
         ->where('payment_status', '!=', 'Annulé')
         ->select(
