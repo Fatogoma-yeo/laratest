@@ -92,9 +92,9 @@ class InventoryController extends Controller
         }
 
         $stock_detail = Inventory::with('product')->get();
-        $stockDetail = Inventory::with('product')->where('stock_hs_physic', '<>', null)->firstOrFail();
+        $stockDetail_count = Inventory::with('product')->where('stock_hs_physic', '<>', null)->count();
 
-        return view('pages.inventory.physic_stock_hs', compact('stock_detail', 'stockDetail'));
+        return view('pages.inventory.physic_stock_hs', compact('stock_detail', 'stockDetail_count'));
     }
 
     public function inventoryStockValidate(StoreInventoryRequest $request)
