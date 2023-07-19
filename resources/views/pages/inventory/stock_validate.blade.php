@@ -62,7 +62,7 @@
                                           <td class="p-2 border border-gray-500 text-right flex flex-row">
                                             <span class="flex flex-row mx-2" id="comptable">
                                                 @if($inventory->check_stock_hs_1 == 0)
-                                                    @if(Auth::user()->email == 'comptabilite@fusiontechci.com')
+                                                    @if(Auth::user()->email == 'laratest@laratest.com')
                                                       <button type="button" onclick="checkStockHs1('{{ $inventory->product->id }}')" class="inline-flex justify-center py-1 px-2 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                                         @if($inventory->stock_hs_physic == 0 || $inventory->stock_hs_physic == null) disabled @endif>
 
@@ -83,7 +83,7 @@
                                               </span>
                                               <span class="flex flex-row" id="chef_commercial">
                                                 @if($inventory->check_stock_hs_2 == 0)
-                                                    @if(Auth::user()->email == 'servicecommercial@fusiontechci.com')
+                                                    @if(Auth::user()->email == 'ates@ates.com')
                                                       <button type="button" onclick="checkStockHs2('{{ $inventory->product->id }}')" class="inline-flex justify-center py-1 px-2 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                                         @if($inventory->stock_hs_physic == 0 || $inventory->stock_hs_physic == null) disabled @endif>
 
@@ -119,7 +119,7 @@
                                         <td class="p-2 border border-gray-500 text-right"><span class="mx-2 font-semibold" id="total_stock_physic">0</span></td>
                                         <td class="p-2 border border-gray-500 text-center">
                                           <span>
-                                            @if(count($stock_hs_detail) > 0 && Auth::user()->email == 'agencefke@fusiontechci.com')
+                                            @if(count($stock_hs_detail) > 0 && Auth::user()->email == 'agence@agence.com')
                                               <button class="inline-flex items-center px-4 py-2 bg-gray-0 rounded font-semibold text-sm text-white tracking-widest hover:bg-green-600 focus:bg-green-600 active:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 transition ease-in-out duration-150" @if($inventoryCount != $inventoryCheckCount || $inventoryCount == 0) disabled @endif>
                                                   {{ __( 'Stocked' ) }}
                                               </button>

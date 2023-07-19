@@ -17,6 +17,7 @@ class EmailAccountSeeder extends Seeder
     {
         $emails = [
             'test@test.com',
+            'agence@agence.com',
             'ates@ates.com',
             'laratest@laratest.com',
         ];
