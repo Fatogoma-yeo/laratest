@@ -930,6 +930,15 @@ select {
 .h-2\/5 {
   height: 40%;
 }
+.h-half{
+  height:50vh!important
+}
+.h-2\/5-screen{
+  height:40vh!important
+}
+.h-3\/5-screen{
+  height:60vh!important
+}
 .h-5\/7-screen {
   height:71.42vh!important
 }
@@ -2523,12 +2532,12 @@ select {
   .md\:min-h-screen {
     min-height: 100vh;
   }
-  
+
   .md\:px-2 {
     padding-left: 0.5rem/* 8px */ !important;
     padding-right: 0.5rem/* 8px */ !important;
   }
-  
+
   .md\:-mx-2 {
     margin-left: -0.5rem/* -8px */ !important;
     margin-right: -0.5rem/* -8px */ !important;
@@ -2643,6 +2652,10 @@ select {
 
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr))!important
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr))!important
   }
 
   .lg\:grid-cols-4 {
