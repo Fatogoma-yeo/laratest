@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <!-- Displays on pos -->
-                <div x-data ="{ checked: 2, activeClasses:'shadow rounded-lg bg-indigo-600 text-white', inactiveClasses:'focus:bg-white', active:1, inactive:0, textColor:'text-white', textInColor:'text-gray-900' }" class="mt-4 sm:px-6" x-cloak>
+                <div class="mt-4 w-full sm:px-6">
                     <x-input-label for="status" :value="__('Status du produit')" />
                     <div class="flex border-transparent rounded-lg bg-white w-1/2 mt-1">
                         <div class="flex items-center justify-center w-full">
