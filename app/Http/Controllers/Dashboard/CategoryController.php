@@ -53,7 +53,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $fields = $request->only([ 'name', 'parent_id', 'media' ]);
+        $fields = $request->only([ 'name', 'parent_id', 'displays_on_pos', 'media' ]);
 
         $category = new ProductCategory;
 
@@ -115,7 +115,7 @@ class CategoryController extends Controller
     {
         $category = ProductCategory::find( $category->id );
 
-        $fields = $request->only([ 'name', 'parent_id', 'displays_on_pos', 'media_id' ]);
+        $fields = $request->only([ 'name', 'parent_id', 'displays_on_pos', 'media' ]);
 
         foreach ( $fields as $name => $field ) {
             $category->$name = $field;
