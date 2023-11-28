@@ -44,7 +44,7 @@
                 <!-- Displays on pos -->
                 <div class="mt-4 sm:px-6 w-full">
                     <x-input-label for="displays_on_pos" :value="__('Afficher sur la page de vente')" />
-                    <div class="flex border-transparent rounded-lg bg-white w-1/2 mt-1">
+                    <div class="flex border-transparent rounded-lg bg-white shadow-lg w-full mt-1">
                         <div class="flex items-center justify-center w-full">
                           <input type="radio" name="displays_on_pos" id="active" checked value="1" class="hidden"/>
                           <label for="active" class="radio w-full text-center text-lg py-2 px-4 rounded-l-lg cursor-pointer hover:opacity-75">En soldes</label>
